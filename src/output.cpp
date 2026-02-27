@@ -1893,6 +1893,28 @@ static bool can_combine_comment(Chunk *pc, const cmt_reflow &cmt)
 } // can_combine_comment
 
 
+static bool has_code_before_same_line(const Chunk *c)
+{
+   const size_t line = c->GetOrigLine();
+
+   for (Chunk* p = c->GetPrev(); p->IsNotNullChunk(); p = p->GetPrev())
+   {
+      if (p->GetOrigLine() != line)
+      {
+         return false;
+      }
+
+      const E_Token t = p->GetType();
+      if (t == CT_WHITESPACE || t == CT_SPACE)
+      {
+         continue;
+      }
+      return true;
+   }
+   return false;
+}
+
+
 static Chunk *output_comment_c(Chunk *first)
 {
    cmt_reflow cmt;
@@ -1916,6 +1938,13 @@ static Chunk *output_comment_c(Chunk *first)
                              && first->IsLastChunkOnLine()
                              && first->Str().at(2) != '*');
 
+      if (replace_comment
+          && !options::cmt_treat_comment_only_lines_as_trailing()
+          && !has_code_before_same_line(first))
+      {
+            // Don't consider this a "trailing" comment (not preceded by code)
+            replace_comment = false;
+      }
       if (  replace_comment
          && first->TestFlags(PCF_IN_PREPROC))
       {

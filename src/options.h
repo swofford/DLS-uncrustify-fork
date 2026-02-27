@@ -3913,6 +3913,11 @@ cmt_sp_before_doxygen_javadoc_tags; // = 1
 extern Option<bool>
 cmt_trailing_single_line_c_to_cpp;
 
+// Whether to treat lines containing only comments as "trailing" comments.
+// Only meaningful if cmt_trailing_single_line_c_to_cpp=true.
+extern Option<bool>
+cmt_treat_comment_only_lines_as_trailing;
+
 // Whether to group c-comments that look like they are in a block.
 extern Option<bool>
 cmt_c_group;
