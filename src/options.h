@@ -3893,6 +3893,11 @@ cmt_convert_tab_to_spaces;
 extern Option<bool>
 cmt_indent_multi; // = true
 
+// Whether to suppress indentation that would otherwise be allowed when
+// cmt_indent_multi is true.
+extern Option<bool>
+cmt_suppress_extra_indent;
+
 // Whether to align doxygen javadoc-style tags ('@param', '@return', etc.)
 // and corresponding fields such that groups of consecutive block tags,
 // parameter names, and descriptions align with one another. Overrides that

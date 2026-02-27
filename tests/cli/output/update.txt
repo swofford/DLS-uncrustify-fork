@@ -760,6 +760,7 @@ cmt_reflow_fold_regex_file      = ""
 cmt_reflow_indent_to_paragraph_start = false
 cmt_convert_tab_to_spaces       = false
 cmt_indent_multi                = true
+cmt_suppress_extra_indent       = false
 cmt_align_doxygen_javadoc_tags  = false
 cmt_sp_before_doxygen_javadoc_tags = 1
 cmt_trailing_single_line_c_to_cpp = false

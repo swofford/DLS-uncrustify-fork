@@ -217,6 +217,9 @@ static size_t cmt_parse_lead(const UncText &line, bool is_last);
  *
  * Otherwise, the indent is 0.
  *
+ * Note that if cmt_suppress_extra_indent is true, no indenting is performed
+ * regardless of the criteria specified above.
+ *
  * @param str        The comment string
  * @param len        Length of the comment
  * @param start_col  Starting column
@@ -224,7 +227,6 @@ static size_t cmt_parse_lead(const UncText &line, bool is_last);
  * @return cmt.xtra_indent is set to 0 or 1
  */
 static void calculate_comment_body_indent(cmt_reflow &cmt, const UncText &str);
-
 
 static int next_up(const UncText &text, size_t idx, const UncText &tag);
 
@@ -1664,7 +1666,7 @@ static void add_comment_text(const UncText &text,
          add_char('\n');
          cmt_output_indent(cmt.brace_col, cmt.base_col, cmt.column);
 
-         if (cmt.xtra_indent > 0)
+         if (cmt.xtra_indent > 0 && !options::cmt_suppress_extra_indent())
          {
             add_char(' ');
          }
@@ -1693,7 +1695,7 @@ static void add_comment_text(const UncText &text,
          add_char('\n');
          cmt_output_indent(cmt.brace_col, cmt.base_col, cmt.column);
 
-         if (cmt.xtra_indent > 0)
+         if (cmt.xtra_indent > 0 && !options::cmt_suppress_extra_indent())
          {
             add_char(' ');
          }
@@ -2812,7 +2814,7 @@ static void output_comment_multi(Chunk *pc)
                   cmt.column = cmt_col + options::cmt_sp_before_star_cont();
                   cmt_output_indent(cmt.brace_col, cmt.base_col, cmt.column);
 
-                  if (cmt.xtra_indent > 0)
+                  if (cmt.xtra_indent > 0 && !options::cmt_suppress_extra_indent())
                   {
                      add_char(' ');
                   }
@@ -2851,7 +2853,7 @@ static void output_comment_multi(Chunk *pc)
                      cmt.column = start_col;
                      cmt_output_indent(cmt.brace_col, cmt.base_col, cmt.column);
 
-                     if (cmt.xtra_indent > 0)
+                     if (cmt.xtra_indent > 0 && !options::cmt_suppress_extra_indent())
                      {
                         add_char(' ');
                      }
@@ -2873,7 +2875,7 @@ static void output_comment_multi(Chunk *pc)
                   cmt.column = cmt_col + options::cmt_sp_before_star_cont();
                   cmt_output_indent(cmt.brace_col, cmt.base_col, cmt.column);
 
-                  if (cmt.xtra_indent > 0)
+                  if (cmt.xtra_indent > 0 && !options::cmt_suppress_extra_indent())
                   {
                      add_char(' ');
                   }

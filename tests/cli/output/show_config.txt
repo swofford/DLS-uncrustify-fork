@@ -3188,6 +3188,12 @@ cmt_convert_tab_to_spaces       = false    # true/false
 # Default: true
 cmt_indent_multi                = true     # true/false
 
+# Whether to suppress indentation that would otherwise be allowed when
+# cmt_indent_multi is true.
+#
+# Default: false
+cmt_suppress_extra_indent       = false     # true/false
+
 # Whether to align doxygen javadoc-style tags ('@param', '@return', etc.)
 # and corresponding fields such that groups of consecutive block tags,
 # parameter names, and descriptions align with one another. Overrides that
